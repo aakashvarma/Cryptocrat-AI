@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Sentiment Analysis using LSTM
 
 #### List of Websites:
@@ -11,3 +12,10 @@ Note: Why not reddit? Because reddit data is content which is posted irrespectiv
 
 Different types of inputs can be given into any deep neural network but the input which the neural network understands is a scalar value or a matrix of scalar values.
 Word to Vec is converting the words into scalar values.
+=======
+# Sentiment Analysis using LSTM
+
+#### Step 1 - Word to Vector
+
+Different types of inputs can be given into any deep neural network but the input which the neural network understands is a scalar value or a matrix of scalar values.
+>>>>>>> d63bda0cc62deb2b4706e4245a449df3548e07ae
