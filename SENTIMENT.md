@@ -16,3 +16,4 @@ Note: Why not reddit? Because reddit data is content which is posted irrespectiv
 Different types of inputs can be given into any deep neural network but the input which the neural network understands is a scalar value or a matrix of scalar values.
 Word to Vec is converting the words into scalar values.
 
+
