@@ -9,16 +9,21 @@ def link_scrape():
     soup = BeautifulSoup(page.text, 'html.parser')
 
     article_tags = soup.find("div", {"id": "content"})
-    # print (article_tags)
     article_links = article_tags.find_all(class_="fade")
-    # print (article_links)
 
     for a in article_links:
-        # print (a.contents)
         links = a.get('href')
         print (links)
 
 def text_scrape():
+    url = "https://www.coindesk.com/ford-patent-envisions-car-car-crypto-transactions/"
+    page = requests.get(url)
+
+    soup = BeautifulSoup(page.text, 'html.parser')
+    content_div_element = soup.find(class_= 'article-content-container')
+
+    for node in content_div_element.findAll('p'):
+        print(''.join(node.findAll(text=True)))
     
 
 
