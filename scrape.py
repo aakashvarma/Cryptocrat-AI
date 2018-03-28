@@ -1,6 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 import re
+import numpy as np
+
+links_list = []
 
 def link_scrape():
     url = "https://www.coindesk.com/"
@@ -13,17 +16,25 @@ def link_scrape():
 
     for a in article_links:
         links = a.get('href')
-        print (links)
+        links_list.append(links)
+    
+    return links_list
+
 
 def text_scrape():
-    url = "https://www.coindesk.com/ford-patent-envisions-car-car-crypto-transactions/"
-    page = requests.get(url)
+    lin = link_scrape()
+    # print (lin)
+    for l in lin:
+        url = l
+        page = requests.get(url)
 
-    soup = BeautifulSoup(page.text, 'html.parser')
-    content_div_element = soup.find(class_= 'article-content-container')
+        soup = BeautifulSoup(page.text, 'html.parser')
+        content_div_element = soup.find(class_= 'article-content-container')
 
-    for node in content_div_element.findAll('p'):
-        print(''.join(node.findAll(text=True)))
+        for node in content_div_element.findAll('p'):
+            print(''.join(node.findAll(text=True)))
+
+text_scrape()
     
 
 
