@@ -24,15 +24,20 @@ def link_scrape():
 def text_scrape():
     lin = link_scrape()
     # print (lin)
-    for l in lin:
-        url = l
-        page = requests.get(url)
+    try: 
+        for l in lin:
+            url = l
+            page = requests.get(url)
 
-        soup = BeautifulSoup(page.text, 'html.parser')
-        content_div_element = soup.find(class_= 'article-content-container')
+            soup = BeautifulSoup(page.text, 'html.parser')
+            content_div_element = soup.find(class_= 'article-content-container')
 
-        for node in content_div_element.findAll('p'):
-            print(''.join(node.findAll(text=True)))
+            for node in content_div_element.findAll('p'):
+                print(''.join(node.findAll(text=True)))
+    except EOFError:
+        print (" EOFError occurred ")
+    except OSError:
+        print (" OSError occurred ")
 
 text_scrape()
     
