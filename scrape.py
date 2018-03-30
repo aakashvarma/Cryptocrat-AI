@@ -5,43 +5,48 @@ import numpy as np
 
 links_list = []
 
-def link_scrape():
-    url = "https://www.coindesk.com/"
-    page = requests.get(url)
+class Scrape:
 
-    soup = BeautifulSoup(page.text, 'html.parser')
+    def __init__(self):
+        pass   
 
-    article_tags = soup.find("div", {"id": "content"})
-    article_links = article_tags.find_all(class_="fade")
+    def link_scrape(self, url):
+        page = requests.get(url)
 
-    for a in article_links:
-        links = a.get('href')
-        links_list.append(links)
-    
-    return links_list
+        soup = BeautifulSoup(page.text, 'html.parser')
+
+        article_tags = soup.find("div", {"id": "content"})
+        article_links = article_tags.find_all(class_="fade")
+
+        for a in article_links:
+            links = a.get('href')
+            links_list.append(links)
+        
+        return links_list
 
 
-def text_scrape():
-    lin = link_scrape()
-    # print (lin)
-    try: 
-        for l in lin:
-            url = l
-            page = requests.get(url)
+    def content_scrape(self, url):
+        lin = self.link_scrape(url)
+        # print (lin)
+        try: 
+            for l in lin:
+                url_c = l
+                page = requests.get(url_c)
 
-            soup = BeautifulSoup(page.text, 'html.parser')
-            content_div_element = soup.find(class_= 'article-content-container')
+                soup = BeautifulSoup(page.text, 'html.parser')
+                content_div_element = soup.find(class_= 'article-content-container')
 
-            for node in content_div_element.findAll('p'):
-                print(''.join(node.findAll(text=True)))
-    except EOFError:
-        print (" EOFError occurred ")
-    except OSError:
-        print (" OSError occurred ")
+                for node in content_div_element.findAll('p'):
+                    print(''.join(node.findAll(text=True)))
+        except EOFError:
+            print (" EOFError occurred ")
+        except OSError:
+            print (" OSError occurred ")
 
-text_scrape()
-    
+    # content_scrape()
 
+s = Scrape()  
+s.content_scrape("https://www.coindesk.com/")
 
 
 
