@@ -27,7 +27,6 @@ class Scrape:
 
     def content_scrape(self, url):
         lin = self.link_scrape(url)
-        # print (lin)
         try: 
             for l in lin:
                 url_c = l
@@ -43,10 +42,10 @@ class Scrape:
         except OSError:
             print (" OSError occurred ")
 
-    # content_scrape()
 
-s = Scrape()  
-s.content_scrape("https://www.coindesk.com/")
+if __name__ == '__main__':
+    s = Scrape()  
+    s.content_scrape("https://www.coindesk.com/")
 
 
 
