@@ -4,6 +4,7 @@ import re
 import numpy as np
 
 links_list = []
+c = []
 
 class Scrape:
 
@@ -36,7 +37,8 @@ class Scrape:
                 content_div_element = soup.find(class_= 'article-content-container')
 
                 for node in content_div_element.findAll('p'):
-                    print(''.join(node.findAll(text=True)))
+                    c.append(''.join(node.findAll(text=True)))
+                print (c)
         except EOFError:
             print (" EOFError occurred ")
         except OSError:
