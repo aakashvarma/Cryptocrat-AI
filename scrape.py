@@ -43,12 +43,21 @@ class Scrape:
             print (" EOFError occurred ")
         except OSError:
             print (" OSError occurred ")
+        except:
+            print (" Unexpected error ")
+
+    # def check(self, url):
+    #     lin = self.link_scrape(url)
+    #     if lin[0] == lin[1]:
+    #         continue
+    #     elif lin[0] != lin[1]:
+    #         return lin[0]
 
 
 if __name__ == '__main__':
     s = Scrape()  
     s.content_scrape("https://www.coindesk.com/")
-
+    # print(s.link_scrape("https://www.coindesk.com/"))
 
 
 
