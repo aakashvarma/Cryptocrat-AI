@@ -1,3 +1,7 @@
+# date-time to be added
+# firebase class encapsulation / new method
+
+
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -13,14 +17,14 @@ class Scrape:
         pass   
 
     def link_scrape(self, url):
-        page = requests.get(url)
+        self.page = requests.get(url)
 
-        soup = BeautifulSoup(page.text, 'html.parser')
+        soup = BeautifulSoup(self.page.text, 'html.parser')
 
-        article_tags = soup.find("div", {"id": "content"})
-        article_links = article_tags.find_all(class_="fade")
+        self.article_tags = soup.find("div", {"id": "content"})
+        self.article_links = self.article_tags.find_all(class_="fade")
 
-        for a in article_links:
+        for a in self.article_links:
             links = a.get('href')
             links_list.append(links)
         
