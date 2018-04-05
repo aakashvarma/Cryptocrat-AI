@@ -41,41 +41,35 @@ class Scrape:
                     c.append(''.join(node.findAll(text=True)))
                 return c
         except EOFError:
-            print (" EOFError occurred ")
+            return " EOFError occurred "
         except OSError:
             return " OSError occurred "
         except:
-            print (" Unexpected error ")
+            return " Unexpected error "
 
-    # def check(self, url):
-    #     lin = self.link_scrape(url)
-    #     if lin[0] == lin[1]:
-    #         continue
-    #     elif lin[0] != lin[1]:
-    #         return lin[0]
 
 
 if __name__ == '__main__':
     s = Scrape()  
-    print (s.content_scrape("https://www.coindesk.com/"))
+    content = s.content_scrape("https://www.coindesk.com/")
     link = s.link_scrape("https://www.coindesk.com/")
     
 
-    # config = {
-    # "apiKey": "AIzaSyAT1llqLb19Zp76JrAOXdgPpb4BGAak1GI",
-    # "authDomain": "cryptocrat-83570.firebaseapp.com",
-    # "databaseURL": "https://cryptocrat-83570.firebaseio.com",
-    # "storageBucket": "cryptocrat-83570.appspot.com"
-    # }
+    config = {
+    "apiKey": "AIzaSyAT1llqLb19Zp76JrAOXdgPpb4BGAak1GI",
+    "authDomain": "cryptocrat-83570.firebaseapp.com",
+    "databaseURL": "https://cryptocrat-83570.firebaseio.com",
+    "storageBucket": "cryptocrat-83570.appspot.com"
+    }
 
-    # firebase = pyrebase.initialize_app(config)
-    # db = firebase.database()
+    firebase = pyrebase.initialize_app(config)
+    db = firebase.database()
 
-    # data = {
-    #     "url": link,
-    #     "text": content
-    # }
-    # db.child("links").child("test1").set(data)
+    data = {
+        "url": link,
+        "text": content
+    }
+    db.child("links").child("test2").set(data)
 
 
 
