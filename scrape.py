@@ -8,6 +8,8 @@ from bs4 import BeautifulSoup
 import re
 import numpy as np
 import pyrebase
+import time
+import datetime
 
 links_list = []
 c = []
@@ -46,13 +48,14 @@ class Scrape:
                     c.append(''.join(node.findAll(text=True)))
                 return c
         except EOFError:
-            return " EOFError occurred "
+            return "EOFError occurred"
         except OSError:
-            return " OSError occurred "
+            return "OSError occurred"
         except:
-            return " Unexpected error "
+            return "Unexpected error"
 
-
+    def date_time():
+        
 
 if __name__ == '__main__':
     s = Scrape()  
@@ -74,7 +77,7 @@ if __name__ == '__main__':
         "url": link[0],
         "text": content
     }
-    db.child("links").child("test2").set(data)
+    db.child("links").child("test1").set(data)
 
 
 
