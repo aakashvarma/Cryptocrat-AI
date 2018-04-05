@@ -39,11 +39,11 @@ class Scrape:
 
                 for node in content_div_element.findAll('p'):
                     c.append(''.join(node.findAll(text=True)))
-                print (c)
+                return c
         except EOFError:
             print (" EOFError occurred ")
         except OSError:
-            print (" OSError occurred ")
+            return " OSError occurred "
         except:
             print (" Unexpected error ")
 
@@ -57,25 +57,25 @@ class Scrape:
 
 if __name__ == '__main__':
     s = Scrape()  
-    #s.content_scrape("https://www.coindesk.com/")
-    print(s.link_scrape("https://www.coindesk.com/"))
+    print (s.content_scrape("https://www.coindesk.com/"))
+    link = s.link_scrape("https://www.coindesk.com/")
     
 
-    config = {
-    "apiKey": "AIzaSyAT1llqLb19Zp76JrAOXdgPpb4BGAak1GI",
-    "authDomain": "cryptocrat-83570.firebaseapp.com",
-    "databaseURL": "https://cryptocrat-83570.firebaseio.com",
-    "storageBucket": "cryptocrat-83570.appspot.com"
-    }
+    # config = {
+    # "apiKey": "AIzaSyAT1llqLb19Zp76JrAOXdgPpb4BGAak1GI",
+    # "authDomain": "cryptocrat-83570.firebaseapp.com",
+    # "databaseURL": "https://cryptocrat-83570.firebaseio.com",
+    # "storageBucket": "cryptocrat-83570.appspot.com"
+    # }
 
-    firebase = pyrebase.initialize_app(config)
-    db = firebase.database()
+    # firebase = pyrebase.initialize_app(config)
+    # db = firebase.database()
 
-    data = {
-        "url": 'https://www.coindesk.com/swiss-central-banker-state-backed-crypto-pose-incalculable-risks/',
-        "text": 'None'
-    }
-    db.child("links").child("oe").set(data)
+    # data = {
+    #     "url": link,
+    #     "text": content
+    # }
+    # db.child("links").child("test1").set(data)
 
 
 
