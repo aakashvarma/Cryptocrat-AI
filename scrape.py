@@ -26,6 +26,15 @@ class Scrape:
 
         self.article_tags = soup.find("div", {"id": "content"})
         self.article_links = self.article_tags.find_all(class_="fade")
+        link_title = self.article_tags.find_all('a')
+
+artist_name_list_items = article_tags.find_all(class_="fade")
+-print (artist_name_list_items)
++article_links = article_tags.find_all(class_="fade")
++print (article_links)
+
+
+        print (link_title)
 
         for a in self.article_links:
             links = a.get('href')
@@ -57,28 +66,36 @@ class Scrape:
     def date_time(self):
         return datetime.datetime.now()
 
+
 if __name__ == '__main__':
+
     s = Scrape()  
-    content = s.content_scrape("https://www.coindesk.com/")
-    link = s.link_scrape("https://www.coindesk.com/")
-    d = str(s.date_time())
+    # content = s.content_scrape("https://www.coindesk.com/")
+    # link = s.link_scrape("https://www.coindesk.com/")
+    # l = link[0]
+    # d = str(s.date_time())
 
-    config = {
-    "apiKey": "AIzaSyAT1llqLb19Zp76JrAOXdgPpb4BGAak1GI",
-    "authDomain": "cryptocrat-83570.firebaseapp.com",
-    "databaseURL": "https://cryptocrat-83570.firebaseio.com",
-    "storageBucket": "cryptocrat-83570.appspot.com"
-    }
 
-    firebase = pyrebase.initialize_app(config)
-    db = firebase.database()
+    s.link_scrape("https://www.coindesk.com/")
 
-    data = {
-        "url": link[0],
-        "text": content,
-        "time": d
-    }
-    db.child("links").child("test0").set(data)
+
+    # config = {
+    # "apiKey": "AIzaSyAT1llqLb19Zp76JrAOXdgPpb4BGAak1GI",
+    # "authDomain": "cryptocrat-83570.firebaseapp.com",
+    # "databaseURL": "https://cryptocrat-83570.firebaseio.com",
+    # "storageBucket": "cryptocrat-83570.appspot.com"
+    # }
+
+    # firebase = pyrebase.initialize_app(config)
+    # db = firebase.database()
+
+    # data = {
+    #     "url": l,
+    #     "text": content,
+    #     "time": d
+    # }
+    
+    # db.child("links").child(t).set(data)
 
 
 
