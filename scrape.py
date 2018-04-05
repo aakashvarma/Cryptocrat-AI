@@ -1,5 +1,6 @@
 # date-time to be added
 # firebase class encapsulation / new method
+# change the user from text to automating it
 
 
 import requests
@@ -70,7 +71,7 @@ if __name__ == '__main__':
     db = firebase.database()
 
     data = {
-        "url": link,
+        "url": link[0],
         "text": content
     }
     db.child("links").child("test2").set(data)
