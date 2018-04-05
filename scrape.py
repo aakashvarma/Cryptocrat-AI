@@ -56,8 +56,8 @@ class Scrape:
 
 if __name__ == '__main__':
     s = Scrape()  
-    s.content_scrape("https://www.coindesk.com/")
-    # print(s.link_scrape("https://www.coindesk.com/"))
+    #s.content_scrape("https://www.coindesk.com/")
+    print(s.link_scrape("https://www.coindesk.com/"))
 
 
 
