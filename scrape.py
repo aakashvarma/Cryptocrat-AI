@@ -54,14 +54,14 @@ class Scrape:
         except:
             return "Unexpected error"
 
-    def date_time():
-        
+    def date_time(self):
+        return datetime.datetime.now()
 
 if __name__ == '__main__':
     s = Scrape()  
     content = s.content_scrape("https://www.coindesk.com/")
     link = s.link_scrape("https://www.coindesk.com/")
-    
+    d = str(s.date_time())
 
     config = {
     "apiKey": "AIzaSyAT1llqLb19Zp76JrAOXdgPpb4BGAak1GI",
@@ -75,9 +75,10 @@ if __name__ == '__main__':
 
     data = {
         "url": link[0],
-        "text": content
+        "text": content,
+        "time": d
     }
-    db.child("links").child("test1").set(data)
+    db.child("links").child("test0").set(data)
 
 
 
