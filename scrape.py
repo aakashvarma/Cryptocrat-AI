@@ -1,4 +1,5 @@
 # firebase class encapsulation / new method
+# Automate the whole thing with a time sleep of 60 seconds
 
 
 import requests
@@ -62,33 +63,36 @@ class Scrape:
 if __name__ == '__main__':
 
     s = Scrape()
-
-    s.link_scrape("https://www.coindesk.com/")
-
-    content = s.content_scrape("https://www.coindesk.com/")
-    link = s.link_scrape("https://www.coindesk.com/")
-    l = link[0]
-    d = str(s.date_time())
-    t = title[0]
-
-
-    config = {
-    "apiKey": "AIzaSyAT1llqLb19Zp76JrAOXdgPpb4BGAak1GI",
-    "authDomain": "cryptocrat-83570.firebaseapp.com",
-    "databaseURL": "https://cryptocrat-83570.firebaseio.com",
-    "storageBucket": "cryptocrat-83570.appspot.com"
-    }
-
-    firebase = pyrebase.initialize_app(config)
-    db = firebase.database()
-
-    data = {
-        "url": l,
-        "text": content,
-        "time": d
-    }
     
-    db.child("links").child(t).set(data)
+    while True:        
+        s.link_scrape("https://www.coindesk.com/")
+
+        content = s.content_scrape("https://www.coindesk.com/")
+        link = s.link_scrape("https://www.coindesk.com/")
+        l = link[0]
+        d = str(s.date_time())
+        t = title[0]
+
+
+        config = {
+        "apiKey": "AIzaSyAT1llqLb19Zp76JrAOXdgPpb4BGAak1GI",
+        "authDomain": "cryptocrat-83570.firebaseapp.com",
+        "databaseURL": "https://cryptocrat-83570.firebaseio.com",
+        "storageBucket": "cryptocrat-83570.appspot.com"
+        }
+
+        firebase = pyrebase.initialize_app(config)
+        db = firebase.database()
+
+        data = {
+            "url": l,
+            "text": content,
+            "time": d
+        }
+        
+        db.child("links").child(t).set(data)
+
+        time.sleep(60)
 
 
 

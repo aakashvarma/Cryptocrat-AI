@@ -12,7 +12,7 @@ content = content_div_element.find_all('p')
 for node in content_div_element.findAll('p'):
     print(''.join(node.findAll(text=True)))
 
-
+    
 
 
 
