@@ -1,5 +1,7 @@
 # firebase class encapsulation / new method
-# Automate the whole thing with a time sleep of 60 seconds
+# Fix the list of text appending and printing
+# scraoe the time and date from the site iself
+# select the last element of the list to get the new link ,,,,,   but the list size increases a lot .... so try to append the list inthe starting
 
 
 import requests
@@ -14,21 +16,23 @@ links_list = []
 c = []
 title = []
 
-
 class Scrape:
 
     def __init__(self):
         pass   
 
     def link_scrape(self, url):
-        self.page = requests.get(url)
+        page = requests.get(url)
 
-        soup = BeautifulSoup(self.page.text, 'html.parser')
+        soup = BeautifulSoup(page.text, 'html.parser')
 
-        self.article_tags = soup.find("div", {"id": "content"})
-        self.article_links = self.article_tags.find_all(class_="fade")
+        article_tags = soup.find("div", {"id": "content"})
+        try:
+            article_links = article_tags.find_all(class_="fade")
+        except AttributeError:
+            print ("Attribute error")
 
-        for a in self.article_links:
+        for a in article_links:
             links = a.get('href')
             title.append(a.get('title'))
             links_list.append(links)
@@ -36,8 +40,8 @@ class Scrape:
         return links_list
 
 
-    def content_scrape(self, url):
-        lin = self.link_scrape(url)
+    def content_scrape(self):
+        lin = links_list
         try: 
             for l in lin:
                 url_c = l
@@ -62,14 +66,20 @@ class Scrape:
 
 if __name__ == '__main__':
 
-    s = Scrape()
     
-    while True:        
-        s.link_scrape("https://www.coindesk.com/")
+    # s.link_scrape("https://www.coindesk.com/")
+    # s.content_scrape()
+    # print (title)    
 
-        content = s.content_scrape("https://www.coindesk.com/")
+    while True:
+
+        s = Scrape()
         link = s.link_scrape("https://www.coindesk.com/")
+        content = s.content_scrape()
+
+
         l = link[0]
+        print (l)
         d = str(s.date_time())
         t = title[0]
 
