@@ -7,9 +7,10 @@ import time
 import datetime
 
 
-
 def link_scrape(url):
+    title = []
     links = []
+    result = []
     page = requests.get(url)
 
     soup = BeautifulSoup(page.text, 'html.parser')
@@ -22,24 +23,26 @@ def link_scrape(url):
 
     for a in article_links:
         links.append(a.get('href'))
-    
-    print (links)
-    print ("_________________________________________________________________________")
+        title.append(a.get('title'))
+
+    result.append(links[0])
+    result.append(title[0])
+    return result
 
 
-def content_scrape():
-    lin = links_list
+def content_scrape(url):
+    c = []
+    lin = link_scrape(url)[0]
     try: 
-        for l in lin:
-            url_c = l
-            page = requests.get(url_c)
+        url_c = lin
+        page = requests.get(url_c)
 
-            soup = BeautifulSoup(page.text, 'html.parser')
-            content_div_element = soup.find(class_= 'article-content-container')
+        soup = BeautifulSoup(page.text, 'html.parser')
+        content_div_element = soup.find(class_= 'article-content-container')
 
-            for node in content_div_element.findAll('p'):
-                c.append(''.join(node.findAll(text=True)))
-            return c
+        for node in content_div_element.findAll('p'):
+            c.append(''.join(node.findAll(text=True)))
+        return c
     except EOFError:
         return "EOFError occurred"
     except OSError:
@@ -47,37 +50,44 @@ def content_scrape():
     except:
         return "Unexpected error"
 
+def date_time():
+        return datetime.datetime.now()
+
+
 while True:
-    link_scrape("https://www.coindesk.com/")
-    time.sleep(60)
+
+    text = content_scrape("https://www.coindesk.com/")
+    link = link_scrape("https://www.coindesk.com/")[0]
+    d = str(date_time())
+    t = link_scrape("https://www.coindesk.com/")[1]
 
 
-# while True:
 
-#     link = link_scrape("https://www.coindesk.com/")
-#     content = content_scrape()
+    try:
+        print (link)
+        print (t)
+    except OSError:
+        print ("OSError")
+    except:
+        print("error")  
 
 
-#     l = link[0]
-#     print (l)
-#     t = title[0]
+    config = {
+    "apiKey": "AIzaSyAT1llqLb19Zp76JrAOXdgPpb4BGAak1GI",
+    "authDomain": "cryptocrat-83570.firebaseapp.com",
+    "databaseURL": "https://cryptocrat-83570.firebaseio.com",
+    "storageBucket": "cryptocrat-83570.appspot.com"
+    }
 
+    firebase = pyrebase.initialize_app(config)
+    db = firebase.database()
 
-#     config = {
-#     "apiKey": "AIzaSyAT1llqLb19Zp76JrAOXdgPpb4BGAak1GI",
-#     "authDomain": "cryptocrat-83570.firebaseapp.com",
-#     "databaseURL": "https://cryptocrat-83570.firebaseio.com",
-#     "storageBucket": "cryptocrat-83570.appspot.com"
-#     }
-
-#     firebase = pyrebase.initialize_app(config)
-#     db = firebase.database()
-
-#     data = {
-#         "url": l,
-#         "text": content
-#     }
+    data = {
+        "url": link,
+        "text": text,
+        "time": d
+    }
     
-#     db.child("links").child(t).set(data)
+    db.child("links").child(t).set(data)
 
-#     time.sleep(60)
+    time.sleep(60)

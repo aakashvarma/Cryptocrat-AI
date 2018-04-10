@@ -2,6 +2,9 @@
 # Fix the list of text appending and printing
 # scraoe the time and date from the site iself
 # select the last element of the list to get the new link ,,,,,   but the list size increases a lot .... so try to append the list inthe starting
+# env files for config of firebase
+
+
 
 
 import requests
@@ -66,10 +69,6 @@ class Scrape:
 
 if __name__ == '__main__':
 
-    
-    # s.link_scrape("https://www.coindesk.com/")
-    # s.content_scrape()
-    # print (title)    
 
     while True:
 
