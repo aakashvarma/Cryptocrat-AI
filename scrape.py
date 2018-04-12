@@ -3,7 +3,7 @@
 # scraoe the time and date from the site iself
 # select the last element of the list to get the new link ,,,,,   but the list size increases a lot .... so try to append the list inthe starting
 # env files for config of firebase
-
+# use encapsulation
 
 
 
