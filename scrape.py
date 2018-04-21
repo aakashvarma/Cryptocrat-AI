@@ -8,7 +8,6 @@
 # sentiment - use text blob library
 
 
-
 import requests
 from bs4 import BeautifulSoup
 import re
