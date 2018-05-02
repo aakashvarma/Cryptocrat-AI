@@ -8,7 +8,7 @@
 # sentiment - use text blob library
 # ****remove the configuration keys and passwords ASAP****
 
-
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import re
