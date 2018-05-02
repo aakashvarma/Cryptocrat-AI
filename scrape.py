@@ -6,6 +6,7 @@
 # use encapsulation
 # code review - exteral
 # sentiment - use text blob library
+# ****remove the configuration keys and passwords ASAP****
 
 
 import requests
